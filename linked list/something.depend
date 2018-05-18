@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1524138854 source:c:\users\mantas\desktop\programavimas\something\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1525353240 source:c:\users\mantas\desktop\somethingupd\main.c
+	<stdio.h>
+	<stdlib.h>
+
