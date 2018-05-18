@@ -7,25 +7,17 @@ struct list {
 };
 
 typedef struct list Listas;
-typedef Listas * ListPtr;
+typedef Listas* ListPtr;
 
 Listas* AddToEnd(ListPtr head, int value)
 {
     ListPtr tmp;
-    printf("entered add to end\n");
 
     if(head==NULL)
 {
-    printf("entered 1st if\n");
     head = (ListPtr)malloc(sizeof(Listas));
     head->data=value;
     head->next=NULL;
-
-    if(head==NULL)
-    {
-        printf("Error assigning memory.");
-        exit(0);
-    }
 }
 else
 {
@@ -143,18 +135,18 @@ else
 
 void PrintList(ListPtr head)
 {
-
+    int i=1;
     ListPtr current;
     current = head;
 
     if(current != NULL)
     {
-        printf ("\n------------------\n");
 
         do
         {
-            printf ("%d ", current->data);
+            printf ("[%d] - %d \n",i, current->data);
             current = current->next;
+            i++;
         }
         while (current != NULL);
 
@@ -162,6 +154,7 @@ void PrintList(ListPtr head)
     }
     else
         printf ("The list is empty \n");
+    system("pause");
 }
 
 Listas* del(ListPtr head, int value)
@@ -173,6 +166,7 @@ Listas* del(ListPtr head, int value)
 
     tmp=head;
 
+    printf ("\n");
     if(value<1)
     {
         printf("Selected element does not exist\n");
@@ -227,19 +221,19 @@ void main()
 
     while(a == 1)
     {
-        printf("- What do you want to do? -");
-        printf("\nAdd to start -> 1");
-        printf("\nAdd to selected field -> 2");
-        printf("\nAdd to end -> 3");
-        printf("\nPrint List -> 4");
-        printf("\nQuit -> 5");
-        printf("\nDelete list -> 6");
-        printf("\nDelete element -> 7");
-        printf("\n");
+        system("cls");
+        printf("What do you want to do?\n\n\n");
+        printf("[1] - Add to start;\n");
+        printf("[2] - Add to selected field;\n");
+        printf("[3] - Add to end;\n");
+        printf("[4] - Delete element;\n");
+        printf("[5] - Delete list;\n");
+        printf("[6] - Print List;\n");
+        printf("[7] - Quit;\n\n");
         scanf("%d", &choice);
         printf("\n");
 
-        if(choice == 5)
+        if(choice == 7)
             break;
 
         if(choice == 1)
@@ -252,12 +246,22 @@ void main()
         {
             if(head!=0)
             {
-            PrintList(head);
+            ListPtr current;
+            current = head;
+            int i=1;
+            do
+            {
+                printf ("[%d] - %d \n",i, current->data);
+                current = current->next;
+                i++;
+            }
+            while (current != NULL);
+            printf ("\n");
             do{
             printf("Where to add?\n");
             scanf("%d", &where);
             if(where<=1)
-                printf("Cannot insert there, select field in the middle or list.\n");
+                printf("Cannot insert here.\n");
 
             }while(where<=1);
             printf("Write a value to add\n");
@@ -273,20 +277,39 @@ void main()
             scanf("%d", &value);
             head = AddToEnd(head,value);
         }
-        else if(choice == 4)
+        else if(choice == 6)
         {
             PrintList(head);
         }
-        else if(choice == 6)
+        else if(choice == 5)
         {
             destroy(head);
             head=NULL;
         }
-        else if(choice == 7)
+        else if(choice == 4)
         {
+            ListPtr current;
+            current = head;
+            int i=1;
+            if(head!=NULL)
+            {
+            do
+            {
+                printf ("[%d] - %d \n",i, current->data);
+                current = current->next;
+                i++;
+            }
+            while (current != NULL);
+            printf ("\n");
             printf("Write a position to delete\n");
             scanf("%d", &value);
             head=del(head,value);
+            }
+            else
+            {
+                printf("\n\nList does not exist.\n\n");
+                system("pause");
+            }
         }
         printf("\n");
     }
