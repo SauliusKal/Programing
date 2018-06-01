@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1527793239 source:c:\users\user\documents\github\programing\kursinis zaidimas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"list gen.c"
+
+1527794291 c:\users\user\documents\github\programing\kursinis zaidimas\list gen.c
+
