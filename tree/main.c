@@ -8,6 +8,7 @@ struct data
     struct data* left;
     struct data* right;
 };
+
 typedef struct data node;
 
 node* createNode(int n)
@@ -48,7 +49,8 @@ int search(node* root,int number)
         return search(root->right,number);
 
 }
-void print(node * tree){
+void print(node * tree)
+{
 	if (tree){
 		print(tree->left);
 		printf("%d ",tree->data);

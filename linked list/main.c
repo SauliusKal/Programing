@@ -11,52 +11,52 @@ typedef Listas* ListPtr;
 
 Listas* AddToEnd(ListPtr head, int value)
 {
-    ListPtr tmp;
-
-    if(head==NULL)
-{
-    head = (ListPtr)malloc(sizeof(Listas));
-    head->data=value;
-    head->next=NULL;
-}
-else
-{
-    printf("entered else\n");
-    tmp=head;
-    while(tmp->next!=NULL)
-    tmp=tmp->next;
-
-    tmp->next=(ListPtr)malloc(sizeof(Listas));
-    if(tmp->next==NULL)
+        ListPtr tmp;
+        if(head==NULL)
     {
-    printf("Error");
-    exit(0);
+        head = (ListPtr)malloc(sizeof(Listas));
+        head->data=value;
+        head->next=NULL;
     }
-    tmp=tmp->next;
-    tmp->data=value;
-    tmp->next=NULL;
-}
-return head;
+    else
+    {
+        printf("entered else\n");
+        tmp=head;
+        while(tmp->next!=NULL)
+        tmp=tmp->next;
+        tmp->next=(ListPtr)malloc(sizeof(Listas));
+        if(tmp->next==NULL)
+        {
+        printf("Error");
+        exit(0);
+        }
+        tmp=tmp->next;
+        tmp->data=value;
+        tmp->next=NULL;
+    }
+    return head;
 }
 
 void destroy(struct list *head)
 {
-struct list *current, *tmp;
-if(head==NULL)
-{
-    printf("List not created");
-}
-else{
-current=head->next;
-head->next=NULL;
-while(current!=NULL){
-tmp=current->next;
-free(current);
-current=tmp;
-}
-free(head);
-head=NULL;
-}
+    struct list *current, *tmp;
+    if(head==NULL)
+    {
+        printf("List not created");
+    }
+    else
+        {
+            current=head->next;
+            head->next=NULL;
+    while(current!=NULL)
+        {
+            tmp=current->next;
+            free(current);
+            current=tmp;
+        }
+    free(head);
+    head=NULL;
+    }
 
 }
 
@@ -257,13 +257,15 @@ void main()
             }
             while (current != NULL);
             printf ("\n");
-            do{
+            do
+                {
             printf("Where to add?\n");
             scanf("%d", &where);
             if(where<=1)
                 printf("Cannot insert here.\n");
 
-            }while(where<=1);
+                }
+            while(where<=1);
             printf("Write a value to add\n");
             scanf("%d", &value);
             AddToCurrent(head, value, where);
@@ -292,13 +294,13 @@ void main()
             current = head;
             int i=1;
             if(head!=NULL)
-            {
+                {
             do
-            {
+                {
                 printf ("[%d] - %d \n",i, current->data);
                 current = current->next;
                 i++;
-            }
+                }
             while (current != NULL);
             printf ("\n");
             printf("Write a position to delete\n");

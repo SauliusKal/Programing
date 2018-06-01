@@ -1,0 +1,19 @@
+po 10mil
+
+quick 9.18
+insertion ?
+selection ?
+shell 5.68
+merge 3.15
+radix 1.07
+heap 4.93
+
+po 1mil
+
+quick 0.23
+insertion ?
+selection ?
+shell 0.39
+merge 0.29
+radix 0.10
+heap 0.312
