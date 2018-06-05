@@ -139,6 +139,7 @@ void destroy(struct list *head)
 
 void PrintList(ListPtr head)
 {
+    system("cls");
     int i=1;
     ListPtr current;
     current = head;
