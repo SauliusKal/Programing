@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1526575844 source:c:\users\eimantas\desktop\merge sort\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1527233699 source:c:\users\s033184\documents\github\programing\merge sort\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+

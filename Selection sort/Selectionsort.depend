@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1526565050 source:c:\users\eimantas\desktop\selectionsort\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1527234346 source:c:\users\s033184\documents\github\programing\selection sort\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+

@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1526560376 source:c:\users\eimantas\desktop\insersion sort\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1527232865 source:c:\users\s033184\documents\github\programing\insersion sort\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
