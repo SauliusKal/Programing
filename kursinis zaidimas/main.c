@@ -41,7 +41,7 @@ int magic(int *currnr, int *maxnr)
         case 1: Player.DMG= rand() % 200 + 200;Player.MP-=20;break;
         case 2: Player.DMG= rand() % 600 + 100;Player.MP-=40;break;
         case 3: Player.HP+= rand() % 300 + 200;Player.MP-=25;break;
-        case 4: itemstart(2,&Player.HP,&Player.MP,&Player.DMG,&currnr,&maxnr);Player.MP-=10;break;
+        case 4: currnr=itemstart(2,&Player.HP,&Player.MP,&Player.DMG,&currnr,&maxnr);Player.MP-=10;break;
         case 0: break;
     }
 }
@@ -122,6 +122,7 @@ int main()
             case 2:system("cls");magic(&currnr,&maxnr);break;
             case 3:system("cls");defend();break;
             case 4:system("cls");itemstart(1,&Player.HP,&Player.MP,&Player.DMG,&currnr,&maxnr);break;
+            case 5:PrintList(currnr);
         }
         Player.HP-=Enemy.DMG;
         Enemy.HP-=Player.DMG;

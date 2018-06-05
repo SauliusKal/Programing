@@ -7,44 +7,76 @@ struct list
 typedef struct list Listas;
 typedef Listas* ListPtr;
 
-Listas* AddToEnd(ListPtr *head,int **currnr, int **maxnr)
+ListPtr head;
+
+void PrintList(int currnr)
 {
-    ListPtr tmp;
-    int value;
+    int i=1,a=0;
+    ListPtr current;
+    current = head;
 
-    do
+    if(head != NULL)
     {
-            tmp=head;
-        value=rand()%2+1;
-        if(tmp==NULL)
-        {
-            tmp = (ListPtr)malloc(sizeof(Listas));
-            tmp->data=value;
-            tmp->next=NULL;
-        }
-        else
-        {
-            while(tmp->next!=NULL)
-            tmp=tmp->next;
 
-            tmp->next=(ListPtr)malloc(sizeof(Listas));
-            if(tmp->next==NULL)
-            {
-            printf("Error");
-            exit(0);
-            }
-            tmp=tmp->next;
-            tmp->data=value;
-            tmp->next=NULL;
+        do
+        {
+            printf ("[%d] - %d \n",i, current->data);
+            if(current->next!=NULL)
+            current = current->next;
+            else
+            {a=1;}
+            i++;
         }
-        (**currnr)++;
-        printf("[%d] - ",(**currnr));
-            printf("%d\n",tmp->data);
+        while (a!=1);
     }
-    while((**currnr)<(**maxnr));
+    else
+        printf ("The list is empty \n");
+    printf("Error);");
 }
 
-int destroy(ListPtr *head)
+Listas* AddToEnd(int **currnr, int **maxnr)
+{
+    ListPtr tmp;
+    int value,a=0;
+
+    if(head==NULL)
+    {
+        value=rand()%3+1;
+        head = (ListPtr)malloc(sizeof(Listas));
+        head->data=value;
+        head->next=NULL;
+        a=1;
+        (**currnr)++;
+    }
+    tmp=head;
+    do
+    {
+        value=rand()%2+1;
+        a=0;
+        while(tmp->next!=NULL)
+        tmp=tmp->next;
+        tmp->next=(ListPtr)malloc(sizeof(Listas));
+        tmp=tmp->next;
+        tmp->data=value;
+        tmp->next=NULL;
+        (**currnr)++;
+//        if(a==1)
+//        {
+//            printf("[%d] - ",(**currnr));
+//            printf("%d\n",head->data);
+//        }
+//        else
+//        {
+//            printf("[%d] - ",(**currnr));
+//            printf("%d\n",tmp->data);
+//        }
+    }
+    while((**currnr)<(**maxnr));
+    PrintList(currnr);
+    printf("Error);");
+}
+
+int destroy()
 {
     ListPtr current;
     ListPtr tmp;
@@ -70,7 +102,7 @@ int destroy(ListPtr *head)
 }
 
 
-Listas* UseItem(ListPtr *head,int ***hp, int ***mp, int ***dmg, int ***currnr, int ***maxnr)
+Listas* UseItem(int ***hp, int ***mp, int ***dmg, int ***currnr, int ***maxnr)
 {
     ListPtr tmp;
     ListPtr current;
@@ -79,20 +111,11 @@ Listas* UseItem(ListPtr *head,int ***hp, int ***mp, int ***dmg, int ***currnr, i
     current=head;
 
     tmp=head;
-
+    PrintList(currnr);
     printf("Error[%d]\n",(***currnr));
     if(current != NULL)
     {
 
-        do
-        {
-            printf ("[%d] - %d \n",i,current->data);
-            current = current->next;
-            i++;
-        }
-        while (i<(***currnr));
-
-            printf ("\n");
     }
     else
         printf ("The list is empty \n");
@@ -148,7 +171,7 @@ Listas* UseItem(ListPtr *head,int ***hp, int ***mp, int ***dmg, int ***currnr, i
 //    else if(itemid==3)Player->DMG=rand()%300+300
 }
 
-int ItemsPage(ListPtr *head,int **hp, int **mp, int **dmg, int **currnr, int **maxnr)
+int ItemsPage(int **hp, int **mp, int **dmg, int **currnr, int **maxnr)
 {
     int choice;
     ListPtr current;
@@ -159,6 +182,7 @@ int ItemsPage(ListPtr *head,int **hp, int **mp, int **dmg, int **currnr, int **m
     while(a == 1)
     {
         system("cls");
+        PrintList(currnr);
         printf("What do you want to do?\n\n\n");
         printf("[1] - Use an item;\n");
         printf("[0] - Back to the fight;\n");
@@ -178,7 +202,7 @@ int ItemsPage(ListPtr *head,int **hp, int **mp, int **dmg, int **currnr, int **m
             {
             printf ("\n");
             system("cls");
-            head=UseItem(&*head,&**hp,&**dmg,&**mp,&**currnr,&**maxnr);
+            head=UseItem(&**hp,&**dmg,&**mp,&**currnr,&**maxnr);
             }
             else
             {
@@ -193,13 +217,13 @@ int ItemsPage(ListPtr *head,int **hp, int **mp, int **dmg, int **currnr, int **m
 int itemstart(int id,int *hp, int *mp, int *dmg, int *currnr, int *maxnr)
 {
     ListPtr head;
-    if(id==1)ItemsPage(&head,&(*hp),&(*mp),&(*dmg),&(*currnr),&(*maxnr));
-    if(id==2)AddToEnd(&head,&(*currnr),&(*maxnr));
+    if(id==1)ItemsPage(&(*hp),&(*mp),&(*dmg),&(*currnr),&(*maxnr));
+    if(id==2)AddToEnd(&*currnr,&*maxnr);
+    return currnr;
 }
 
 int TheEnd()
 {
-    ListPtr head;
-    destroy(head);
+    destroy();
     head=NULL;
 }

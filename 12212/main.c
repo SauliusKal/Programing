@@ -21,50 +21,45 @@ struct list
 {
     int data;
     struct list *next;
-};
+}head,tmp,current;
 
-typedef struct list Listas;
-typedef Listas* ListPtr;
-
-Listas* AddToEnd(ListPtr head)
+int AddToEnd()
 {
-    ListPtr tmp;
-    int value;
+    int value,velp=0;
     while(Items.CurrentAmmount<Items.MaxAmmount)
     {
         value=rand()%2+1;
-        if(head==NULL)
+        if(head.data==head.next==NULL)
         {
-            head = (ListPtr)malloc(sizeof(Listas));
-            head->data=value;
-            head->next=NULL;
+            head.data=head.next= malloc(sizeof(head));
+            head.data=value;
+            head.next=NULL;
         }
         else
         {
             tmp=head;
-            while(tmp->next!=NULL)
-            tmp=tmp->next;
+            while(tmp.next!=NULL)
+            tmp=tmp.next;
 
-            tmp->next=(ListPtr)malloc(sizeof(Listas));
-            if(tmp->next==NULL)
+            tmp.next=(ListPtr)malloc(sizeof(Listas));
+            if(tmp.next==NULL)
             {
             printf("Error");
             exit(0);
             }
-            tmp=tmp->next;
-            tmp->data=value;
-            tmp->next=NULL;
+            tmp=tmp.next;
+            tmp.data=value;
+            tmp.next=NULL;
         }
         Items.CurrentAmmount++;
     }
-    PrintList(head);
-
-    return head;
+    PrintList();
 }
 
-int destroy(ListPtr head)
+int destroy()
 {
     ListPtr current;
+    ListPtr head;
     ListPtr tmp;
     tmp=head;
     if(head==NULL)
@@ -73,24 +68,24 @@ int destroy(ListPtr head)
     }
     else
     {
-        current=tmp->next;
-        tmp->next=NULL;
+        current=tmp.next;
+        tmp.next=NULL;
         while(current!=NULL)
         {
-            tmp=current->next;
+            tmp=current.next;
             free(current);
             current=tmp;
         }
         free(tmp);
         tmp=NULL;
     }
-
 }
 
-int PrintList(ListPtr head)
+int PrintList()
 {
     int i=1;
     ListPtr current;
+    ListPtr head;
     current = head;
 
     if(current != NULL)
@@ -98,8 +93,8 @@ int PrintList(ListPtr head)
 
         do
         {
-            printf ("[%d] - %d \n",i, current->data);
-            current = current->next;
+            printf ("[%d] - %d \n",i, current.data);
+            current = current.next;
             i++;
         }
         while (current != NULL);
@@ -111,9 +106,10 @@ int PrintList(ListPtr head)
     system("pause");
 }
 
-Listas* UseItem(ListPtr head)
+Listas* UseItem()
 {
-    PrintList(head);
+    PrintList();
+    ListPtr head;
     ListPtr tmp;
     ListPtr current;
     int counter=1,value,itemid,i=1;
@@ -130,8 +126,8 @@ Listas* UseItem(ListPtr head)
     if(value==-1);
     else if(value==1)
     {
-        itemid=tmp->data;
-        head=tmp->next;
+        itemid=tmp.data;
+        head=tmp.next;
         free(tmp);
     }
     else
@@ -141,13 +137,13 @@ Listas* UseItem(ListPtr head)
         {
             while (tmp!=NULL&&deleted!=1)
             {
-                itemid=tmp->data;
+                itemid=tmp.data;
                 current=tmp;
-                tmp=tmp->next;
+                tmp=tmp.next;
                 counter++;
                 if(value==counter)
                     {
-                        current->next=tmp->next;
+                        current.next=tmp.next;
                         free(tmp);
                         deleted = 1;
                     }
@@ -165,15 +161,15 @@ Listas* UseItem(ListPtr head)
     }
     Items.CurrentAmmount--;
 
-//    if(itemid==1)Player->HP+=rand()%100+500;
-//    else if(itemid==2)Player->MP+=rand()%25+75;
-//    else if(itemid==3)Player->DMG=rand()%300+300;
-    return head;
+//    if(itemid==1)Player.HP+=rand()%100+500;
+//    else if(itemid==2)Player.MP+=rand()%25+75;
+//    else if(itemid==3)Player.DMG=rand()%300+300;
 }
 
-int ItemsPage(ListPtr head)
+int ItemsPage()
 {
     int choice;
+    ListPtr head;
     ListPtr current;
     head=NULL;
 
@@ -201,7 +197,7 @@ int ItemsPage(ListPtr head)
             {
             printf ("\n");
             system("cls");
-            head=UseItem(&head);
+            UseItem();
             }
             else
             {
@@ -211,19 +207,18 @@ int ItemsPage(ListPtr head)
         }
         printf("\n");
     }
-    return head;
 }
 
-int itemstart(ListPtr head,int id)
+int itemstart(int id)
 {
-    if(id==1)head = ItemsPage(head);
-    if(id==2)head = AddToEnd(head);
+    if(id==1)ItemsPage();
+    if(id==2)AddToEnd();
 }
 
 int TheEnd()
 {
     ListPtr head;
-    destroy(head);
+    destroy();
     head=NULL;
 }
 
@@ -240,7 +235,7 @@ int attack()
     Player.DMG=Player.DMG * (rand() % 6 + 4);
 }
 
-int magic(ListPtr head)
+int magic()
 {
     int choice;
     printf("[1] Fire - 20mp\n[2] Lightning - 40mp\n[3] Cure - 25mp\n[4] Magic bag - 10mp\n\n[0] <- Back\n");
@@ -255,7 +250,7 @@ int magic(ListPtr head)
         case 1: Player.DMG= rand() % 200 + 200;Player.MP-=20;break;
         case 2: Player.DMG= rand() % 600 + 100;Player.MP-=40;break;
         case 3: Player.HP+= rand() % 300 + 200;Player.MP-=25;break;
-        case 4: itemstart(head,2);Player.MP-=10;break;
+        case 4: itemstart(2);Player.MP-=10;break;
         case 0: break;
     }
 }
@@ -302,7 +297,6 @@ int defend()
 
 int main()
 {
-    ListPtr head;
     int choice=0;
     time_t t;
     srand((unsigned) time(&t));
@@ -335,9 +329,9 @@ int main()
         {
             case 0:exit(1);
             case 1:system("cls");attack();break;
-            case 2:system("cls");magic(head);break;
+            case 2:system("cls");magic();break;
             case 3:system("cls");defend();break;
-            case 4:system("cls");itemstart(head,1);break;
+            case 4:system("cls");itemstart(1);break;
         }
         Player.HP-=Enemy.DMG;
         Enemy.HP-=Player.DMG;
