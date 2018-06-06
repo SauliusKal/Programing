@@ -55,7 +55,7 @@ int intro()
     printf("A simple tutorial:\n");
     printf("\n");
     Delay(4);
-    printf("Attack - use your sword to slash at the troll. Has a chance to do multiple hits, up to 10\n");
+    printf("Attack - use your sword to slash at the troll. Has a chance to do multiple hits\n");
     Delay(2);
     printf("Magic:\n");
     Delay(2);
@@ -65,7 +65,7 @@ int intro()
     Delay(1);
     printf("Cure - restores health\n");
     Delay(1);
-    printf("Magic bag - fills your bag with 9 random items\n\n");
+    printf("Magic bag - fills your bag with 8 random items\n\n");
     Delay(2);
     printf("Defense: lovers the damage taken\n");
     Delay(2);
@@ -92,7 +92,7 @@ Listas* AddToEnd(ListPtr head)
     if(head==NULL)
     {
         head = (ListPtr)malloc(sizeof(Listas));
-        head->data=rand()%3+1;
+        head->data=rand()%120+1;
         head->next=NULL;
         item.CurrentAmount++;
     }
@@ -108,7 +108,7 @@ Listas* AddToEnd(ListPtr head)
         exit(0);
         }
         tmp=tmp->next;
-        tmp->data=rand()%3+1;
+        tmp->data=rand()%120+1;
         tmp->next=NULL;
         item.CurrentAmount++;
     }
@@ -149,11 +149,11 @@ void PrintList(ListPtr head)
 
         do
         {
-            if(current->data==1)
+            if(current->data>0&&current->data<=40)
             printf ("[%d] - Healing potion \n",i);
-            else if(current->data==2)
+            else if(current->data>40&&current->data<=80)
             printf ("[%d] - Mana potion \n",i);
-            else if(current->data==3)
+            else
             printf ("[%d] - A bomb \n",i);
             current = current->next;
             i++;
@@ -236,8 +236,12 @@ int main()
     Player.MaxHP=3500;
     Player.MP=347;
     Player.MaxMP=500;
+    int huh;
 
-    intro();
+    printf("Do you want an introduction?\nY-[1]\nN-[0]\n\n");
+    scanf("%d",&huh);
+    system("cls");
+    if(huh==1)intro();
 
     int aformition = 1;
     int choice = 0;
@@ -316,9 +320,9 @@ int main()
                     printf("Which item do you want to use?\n");
                     scanf("%d",&value);
                     head=del(head,value);
-                    if(item.ID==1)Player.HP+=rand()%200+200;
-                    else if(item.ID==2)Player.MP+=rand()%100+100;
-                    else if(item.ID==3)Player.DMG=rand()%500+500;
+                    if(item.ID>0&&item.ID<=40)Player.HP+=rand()%200+200;
+                    else if(item.ID>40&&item.ID<=80)Player.MP+=rand()%100+100;
+                    else Player.DMG=rand()%500+500;
                 }
                 else
                 {
@@ -334,7 +338,9 @@ int main()
         system("pause");
         system("cls");
     }
-    while(aformition==1);
+    while(Enemy.HP>0&&Player.HP>0);
+    if(Player.HP<=0)printf("You have met with a horrible faith, haven't you...\n\n");
+    if(Enemy.HP<=0)printf("You have killed the monster, but still fell to the wounds that it did to you.\n\nBefore dying tho, you managed to walk trough the huge door... and what you found was a library... that seems to have been burned to the ground.\n\nCongratulations on Winning, kinda, in a way... look, i have no time to fully finish this little game -_-;\nI'm happy that i managed to do this much.\n\nTnx for playing ^^\n");
     destroy(head);
     head=NULL;
 
