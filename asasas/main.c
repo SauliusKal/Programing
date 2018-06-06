@@ -236,7 +236,7 @@ int main()
     Player.MaxHP=3500;
     Player.MP=347;
     Player.MaxMP=500;
-    int huh;
+    int huh=5;
 
     printf("Do you want an introduction?\nY-[1]\nN-[0]\n\n");
     scanf("%d",&huh);
@@ -342,7 +342,6 @@ int main()
     if(Player.HP<=0)printf("You have met with a horrible faith, haven't you...\n\n");
     if(Enemy.HP<=0)printf("You have killed the monster, but still fell to the wounds that it did to you.\n\nBefore dying tho, you managed to walk trough the huge door... and what you found was a library... that seems to have been burned to the ground.\n\nCongratulations on Winning, kinda, in a way... look, i have no time to fully finish this little game -_-;\nI'm happy that i managed to do this much.\n\nTnx for playing ^^\n");
     destroy(head);
-    head=NULL;
 
     return 0;
 }
